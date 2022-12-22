@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   cluster-openstack:
   - apiVersion: v2
+    created: "2022-12-22T10:16:07.460873635Z"
+    description: A helm chart for creating Cluster API clusters with the OpenStack
+      infrastructure provider (CAPO).
+    digest: ec78d2271aa754833aed93f01e29d40450e3e86b58514a5703b77d6a5adce1dc
+    home: https://github.com/eschercloudai/cluster-openstack
+    name: cluster-openstack
+    type: application
+    urls:
+    - https://github.com/eschercloudai/cluster-openstack/releases/download/cluster-openstack-0.6.6/cluster-openstack-0.6.6.tgz
+    version: 0.6.6
+  - apiVersion: v2
     created: "2022-12-19T10:51:13.181227158Z"
     description: A helm chart for creating Cluster API clusters with the OpenStack
       infrastructure provider (CAPO).
@@ -155,4 +166,4 @@ entries:
     urls:
     - https://github.com/eschercloudai/cluster-openstack/releases/download/cluster-openstack-0.4.1/cluster-openstack-0.4.1.tgz
     version: 0.4.1
-generated: "2022-12-19T10:51:13.181327761Z"
+generated: "2022-12-22T10:16:07.461084138Z"
