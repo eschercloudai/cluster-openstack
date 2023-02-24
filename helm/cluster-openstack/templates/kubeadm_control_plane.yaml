@@ -54,11 +54,34 @@ spec:
         kubeletExtraArgs:
           {{- include "kubeletExtraArgs" . | nindent  10}}
         name: {{ include "nodeName" . }}
+    {{- if not .Values.ignition.enable }}
     useExperimentalRetryJoin: true
+    {{- end }}
     files:
       {{- include "kubeProxyFiles" . | nindent 6 }}
     preKubeadmCommands:
+      {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
+    {{- if .Values.ignition.enable }}
+    format: ignition
+    ignition:
+      containerLinuxConfig:
+        additionalConfig: |
+          systemd:
+            units:
+            - name: coreos-metadata-sshkeys@.service
+              enabled: true
+            - name: kubeadm.service
+              enabled: true
+              dropins:
+              - name: 10-flatcar.conf
+                contents: |
+                  [Unit]
+                  Requires=containerd.service coreos-metadata.service
+                  After=containerd.service coreos-metadata.service
+                  [Service]
+                  EnvironmentFile=/run/metadata/flatcar
+    {{- end }}
   machineTemplate:
     infrastructureRef:
       apiVersion: {{ include "infrastructureApiVersion" . }}
