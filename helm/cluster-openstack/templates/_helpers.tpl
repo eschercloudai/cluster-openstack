@@ -68,8 +68,21 @@ room for such suffix.
 {{- end -}}
 
 {{- define "nodeName" -}}
+{{- if .Values.ignition.enable -}}
+__REPLACE_NODE_NAME__
+{{- else -}}
 '{{ `{{ local_hostname }}` }}'
 {{- end -}}
+{{- end -}}
+
+# In Flatcar kubeadm configuration is in different directory because /run
+# can't be provisioned with ignition.
+{{- define "nodeNameReplacePreKubeadmCommands" -}}
+{{- if .Values.ignition.enable }}
+- bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
+{{- end }}
+{{- end -}}
+
 
 {{/*
 Updates in KubeadmConfigTemplate will not trigger any rollout for worker nodes.
