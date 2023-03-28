@@ -96,6 +96,17 @@
         "externalNetworkID": {
             "type": "string"
         },
+        "ignition": {
+            "type": "object",
+            "properties": {
+                "enable": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "enable"
+            ]
+        },
         "kubernetesVersion": {
             "type": "string"
         },

@@ -54,6 +54,9 @@ kubernetesVersion: ""  # Version of Kubernetes. If machine images are specified,
 managementCluster: ""  # Name of cluster which owns this workload cluster.
 organization: ""  # Organization which owns the cluster.
 
+ignition:
+  enable: true # For flatcar support.
+
 nodeCIDR: ""  # The OpenStack Subnet to be created.
 externalNetworkID: ""  # UUID of external network (optional unless there are multiple external networks).
 networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
